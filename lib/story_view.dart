@@ -319,14 +319,17 @@ class StoryViewState extends State<StoryView> with TickerProviderStateMixin {
     // All pages after the first unshown page should have their shown value as
     // false
 
-    final firstPage = widget.storyItems.firstWhere((it) {
+    // final firstPage = widget.storyItems.firstWhere((it) {
+    //   return !it!.shown;
+    // }, orElse: () {
+    //   widget.storyItems.forEach((it2) {
+    //     it2!.shown = false;
+    //   });
+    //
+    //   return null;
+    // });
+    final firstPage = widget.storyItems.firstWhereOrNull((it) {
       return !it!.shown;
-    }, orElse: () {
-      widget.storyItems.forEach((it2) {
-        it2!.shown = false;
-      });
-
-      return null;
     });
 
     if (firstPage != null) {
@@ -481,8 +484,11 @@ class StoryViewState extends State<StoryView> with TickerProviderStateMixin {
     }
   }
 
+  // Widget get currentView => widget.storyItems
+  //     .firstWhere((it) => !it!.shown, orElse: () => widget.storyItems.last)!
+  //     .view;
   Widget get currentView => widget.storyItems
-      .firstWhere((it) => !it!.shown, orElse: () => widget.storyItems.last)!
+      .firstWhereOrNull((it) => !it!.shown)!
       .view;
 
   @override

@@ -1,28 +1,28 @@
 name: flutter_instagram_stories
 homepage: https://github.com/awaik/flutter_instagram_stories
 description: Display stories (videos and images) like Whatsapp & Instagram.
-version: 1.0.3+1
+version: 1.0.4+1
 
 environment:
-  sdk: '>=2.18.0 <3.0.0'
+  sdk: '>=3.1.5 <4.0.0'
 
 dependencies:
   flutter:
     sdk: flutter
   rxdart: ^0.27.7
-  video_player: ^2.6.0
-  cached_network_image: ^3.2.3
-  flutter_cache_manager: ^3.3.0
-  firebase_core: ^2.10.0
-  cloud_firestore: ^4.5.3
-  dotted_border: any
-  json_annotation: any
-  collection: any
+  video_player: ^2.8.1
+  cached_network_image: ^3.3.0
+  flutter_cache_manager: ^3.3.1
+  firebase_core: ^2.24.2
+  cloud_firestore: ^4.13.6
+  dotted_border: ^2.1.0
+  json_annotation: ^4.8.1
+  collection: ^1.18.0
 
 dev_dependencies:
-  build_runner: any
-  json_serializable: any
-  flutter_lints: any
+  build_runner: ^2.4.7
+  json_serializable: ^6.7.1
+  flutter_lints: ^3.0.1
 
 false_secrets:
   - /example/lib/firebase_options.dart

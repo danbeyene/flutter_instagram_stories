@@ -11,7 +11,10 @@ class Stories {
   String? previewImage;
   // caption on the each story, can be null
   Map<String, String>? previewTitle;
-
+@override
+String toString(){
+return "previewTitle: ${previewTitle?['en']} previewImage: ${previewImage}";
+}
   Stories({
     this.storyId,
     this.date,

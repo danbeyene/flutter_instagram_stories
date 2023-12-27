@@ -50,25 +50,19 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyANi5krzaMcqW0rTM8E31IR1sZ1CaYVqNY',
-    appId: '1:163557874485:android:78436bfa3fe0f291c6ca7c',
-    messagingSenderId: '163557874485',
-    projectId: 'flutter-instagram-stories',
-    databaseURL: 'https://flutter-instagram-stories.firebaseio.com',
-    storageBucket: 'flutter-instagram-stories.appspot.com',
+    apiKey: 'AIzaSyCKmPFAfU3EcXdYv_WxApOx13WuKO70qrM',
+    appId: '1:672999640628:android:f438e6f2501dea45034461',
+    messagingSenderId: '672999640628',
+    projectId: 'test-dbcc7',
+    storageBucket: 'test-dbcc7.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyAk0JtpQUy_IWO7kfHWLHUOO_DklcR7J6g',
-    appId: '1:163557874485:ios:c608f4a0877d18f6c6ca7c',
-    messagingSenderId: '163557874485',
-    projectId: 'flutter-instagram-stories',
-    databaseURL: 'https://flutter-instagram-stories.firebaseio.com',
-    storageBucket: 'flutter-instagram-stories.appspot.com',
-    androidClientId:
-        '163557874485-afot62s3fbcct786rdsdjvfo4d9tp1uo.apps.googleusercontent.com',
-    iosClientId:
-        '163557874485-s3f920a07gmv1841g91fgf8jqbjapnl7.apps.googleusercontent.com',
+    apiKey: 'AIzaSyBMseJNcykgnnAz3NZ0wtj3orFXHjRMP7U',
+    appId: '1:672999640628:ios:d28b5e406521dd9f034461',
+    messagingSenderId: '672999640628',
+    projectId: 'test-dbcc7',
+    storageBucket: 'test-dbcc7.appspot.com',
     iosBundleId: 'com.example.example',
   );
 }

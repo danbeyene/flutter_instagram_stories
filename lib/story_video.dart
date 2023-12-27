@@ -26,18 +26,33 @@ class VideoLoader {
       onComplete();
     }
 
-    final Stream<FileInfo> fileStream =
-        // ignore: deprecated_member_use
-        DefaultCacheManager().getFile(this.url!,
-            headers: this.requestHeaders as Map<String, String>?);
+    // final Stream<FileInfo> fileStream =
+    //     // ignore: deprecated_member_use
+    //     DefaultCacheManager().getFile(this.url!,
+    //         headers: this.requestHeaders as Map<String, String>?);
+    final Stream<FileResponse> fileStream = DefaultCacheManager().getFileStream(
+        this.url!,
+        headers: this.requestHeaders as Map<String, String>?);
 
-    fileStream.listen((fileInfo) {
-      if (this.videoFile == null) {
-        this.state = LoadState.success;
-        this.videoFile = fileInfo.file;
-        onComplete();
+    fileStream.listen((fileResponse) {
+      if (fileResponse is FileInfo) {
+        final videoFile = fileResponse.file;
+        if (this.videoFile == null) {
+          print("there is a video =============================== true");
+          this.state = LoadState.success;
+          this.videoFile = videoFile;
+          onComplete();
+        }
       }
     });
+
+    // fileStream.listen((fileInfo) {
+    //   if (this.videoFile == null) {
+    //     this.state = LoadState.success;
+    //     this.videoFile = fileInfo.file;
+    //     onComplete();
+    //   }
+    // });
   }
 }
 
@@ -85,7 +100,8 @@ class StoryVideoState extends State<StoryVideo> {
               VideoPlayerController.file(widget.videoLoader.videoFile!);
 
           playerController!.initialize().then((v) {
-            // setState(() {});
+            setState(() {});
+
             widget.storyController!.play();
           });
 
