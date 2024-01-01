@@ -2,6 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_instagram_stories/video_player_card.dart';
+import 'package:video_player/video_player.dart';
 
 import 'components//stories_list_skeleton.dart';
 import 'grouped_stories_view.dart';
@@ -122,6 +124,7 @@ class FlutterInstagramStories extends StatefulWidget {
   final ProgressPosition progressPosition;
   final bool repeat;
   final bool inline;
+  final bool isDarkMode;
 
   FlutterInstagramStories(
       {required this.collectionDbName,
@@ -156,6 +159,7 @@ class FlutterInstagramStories extends StatefulWidget {
       this.progressPosition = ProgressPosition.top,
       this.repeat = true,
       this.inline = false,
+        required this.isDarkMode,
       this.languageCode = 'en'});
 
   @override
@@ -234,6 +238,7 @@ class _FlutterInstagramStoriesState extends State<FlutterInstagramStories> {
           _buildFuture(res);
 
           return ListView.builder(
+            padding: EdgeInsets.only(right: 15.0),
             scrollDirection: Axis.horizontal,
             primary: false,
             itemCount: stories.length,
@@ -241,7 +246,7 @@ class _FlutterInstagramStoriesState extends State<FlutterInstagramStories> {
               Stories story = storyWidgets[index];
               // print(
               //     "this is all stories ========================================= ${story.toString()}");
-              story.previewTitle!.putIfAbsent(widget.languageCode, () => '');
+              story.previewTitle?.putIfAbsent(widget.languageCode, () => '');
 
               if (index == 0 && widget.lastIconHighlight) {
                 return Padding(
@@ -345,8 +350,8 @@ class _FlutterInstagramStoriesState extends State<FlutterInstagramStories> {
                         ClipRRect(
                           borderRadius:
                               widget.iconImageBorderRadius ?? BorderRadius.zero,
-                          child: CachedNetworkImage(
-                            imageUrl: story.previewImage!,
+                          child: story.file![0].filetype == 'image'?CachedNetworkImage(
+                            imageUrl: story.file![0].url![widget.languageCode]!,
                             width: widget.iconWidth,
                             height: widget.iconHeight,
                             fit: BoxFit.cover,
@@ -357,7 +362,7 @@ class _FlutterInstagramStoriesState extends State<FlutterInstagramStories> {
                             ),
                             errorWidget: (context, url, error) =>
                                 Icon(Icons.error),
-                          ),
+                          ):VideoPlayerCard(videoUrl: story.file![0].url![widget.languageCode]!, width: widget.iconWidth!, height: widget.iconHeight!,isDarkMode: widget.isDarkMode,),
                         ),
                         Container(
                           width: widget.iconWidth,
@@ -370,7 +375,7 @@ class _FlutterInstagramStoriesState extends State<FlutterInstagramStories> {
                               Padding(
                                 padding: widget.textInIconPadding,
                                 child: Text(
-                                  story.previewTitle![widget.languageCode]!,
+                                  story.previewTitle?[widget.languageCode] ?? '',
                                   style: widget.iconTextStyle,
                                   textAlign: TextAlign.left,
                                 ),
