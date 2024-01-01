@@ -239,8 +239,8 @@ class _FlutterInstagramStoriesState extends State<FlutterInstagramStories> {
             itemCount: stories.length,
             itemBuilder: (BuildContext context, int index) {
               Stories story = storyWidgets[index];
-              print(
-                  "this is all stories ========================================= ${story.toString()}");
+              // print(
+              //     "this is all stories ========================================= ${story.toString()}");
               story.previewTitle!.putIfAbsent(widget.languageCode, () => '');
 
               if (index == 0 && widget.lastIconHighlight) {

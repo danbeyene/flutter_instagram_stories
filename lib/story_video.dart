@@ -38,7 +38,7 @@ class VideoLoader {
       if (fileResponse is FileInfo) {
         final videoFile = fileResponse.file;
         if (this.videoFile == null) {
-          print("there is a video =============================== true");
+          // print("there is a video =============================== true");
           this.state = LoadState.success;
           this.videoFile = videoFile;
           onComplete();
