@@ -73,7 +73,7 @@ class _GroupedStoriesViewState extends State<GroupedStoriesView> {
     return PopScope(
       canPop: false,
       onPopInvoked: (isPop){
-        _navigateBack();
+        _navigateBack(context);
       },
       child: Scaffold(
         backgroundColor: widget.backgroundColorBetweenStories,
@@ -117,7 +117,7 @@ class _GroupedStoriesViewState extends State<GroupedStoriesView> {
                       String? nextStoryId =
                           storiesListWithPressed.nextElementStoryId();
                       if (nextStoryId == null) {
-                        _navigateBack();
+                        _navigateBack(context);
                       } else {
                         Navigator.pushReplacement(
                           context,
@@ -136,7 +136,7 @@ class _GroupedStoriesViewState extends State<GroupedStoriesView> {
                       String? previousStoryId =
                           storiesListWithPressed.previousElementStoryId();
                       if (previousStoryId == null) {
-                        _navigateBack();
+                        _navigateBack(context);
                       } else {
                         Navigator.pushReplacement(
                           context,
@@ -170,7 +170,7 @@ class _GroupedStoriesViewState extends State<GroupedStoriesView> {
                         String? nextStoryId =
                             storiesListWithPressed.nextElementStoryId();
                         if (nextStoryId == null) {
-                          _navigateBack();
+                          _navigateBack(context);
                         } else {
                           Navigator.pushReplacement(
                             context,
@@ -190,7 +190,7 @@ class _GroupedStoriesViewState extends State<GroupedStoriesView> {
                     ),
                     onVerticalDragUpdate: (details) {
                       if (details.delta.dy > 0) {
-                        _navigateBack();
+                        _navigateBack(context);
                       }
                     },
                   ));
@@ -203,7 +203,7 @@ class _GroupedStoriesViewState extends State<GroupedStoriesView> {
             padding: const EdgeInsets.all(0.0),
             child: FloatingActionButton(
               onPressed: () {
-                _navigateBack();
+                _navigateBack(context);
               },
               child: widget.closeButtonIcon,
               backgroundColor: widget.closeButtonBackgroundColor,
@@ -233,14 +233,13 @@ class _GroupedStoriesViewState extends State<GroupedStoriesView> {
     );
   }
 
-  _navigateBack() {
-    return Navigator.pop(context);
-    // return Navigator.pushNamedAndRemoveUntil(
-    //   context,
-    //   '/',
-    //   (_) => false,
-    //   arguments: 'back_from_stories_view',
-    // );
+  _navigateBack(BuildContext context) {
+    return Navigator.pushNamedAndRemoveUntil(
+      context,
+      '/',
+      (_) => false,
+      arguments: 'back_from_stories_view',
+    );
   }
 
   void _onStoryShow(StoryItem s) {}
