@@ -1,10 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_instagram_stories/video_player_card.dart';
-import 'package:video_player/video_player.dart';
-
 import 'components//stories_list_skeleton.dart';
 import 'grouped_stories_view.dart';
 import 'models/stories.dart';
@@ -248,177 +245,85 @@ class _FlutterInstagramStoriesState extends State<FlutterInstagramStories> {
               //     "this is all stories ========================================= ${story.toString()}");
               story.previewTitle?.putIfAbsent(widget.languageCode, () => '');
 
-              if (index == 0 && widget.lastIconHighlight) {
-                return Padding(
-                  padding: EdgeInsets.only(left: 15.0, top: 8.0, bottom: 16.0),
-                  child: InkWell(
-                    child: DottedBorder(
-                      color: widget.lastIconHighlightColor,
-                      dashPattern: [8, 4],
-                      strokeWidth: 2,
-                      borderType: BorderType.RRect,
-                      radius: widget.lastIconHighlightRadius,
-                      child: Padding(
-                        padding: const EdgeInsets.all(2.0),
-                        child: Container(
-                          decoration: widget.iconBoxDecoration,
+              return Padding(
+                padding: EdgeInsets.only(left: 15.0, top: 8.0, bottom: 16.0),
+                child: InkWell(
+                  child: Container(
+                    decoration: widget.iconBoxDecoration,
+                    width: widget.iconWidth,
+                    height: widget.iconHeight,
+                    child: Stack(children: <Widget>[
+                      ClipRRect(
+                        borderRadius:
+                        widget.iconImageBorderRadius ?? BorderRadius.zero,
+                        child: story.file![0].filetype == 'image'?CachedNetworkImage(
+                          imageUrl: story.file![0].url![widget.languageCode]!,
                           width: widget.iconWidth,
                           height: widget.iconHeight,
-                          child: Stack(children: <Widget>[
-                            ClipRRect(
-                              borderRadius: widget.iconImageBorderRadius ??
-                                  BorderRadius.zero,
-                              child: CachedNetworkImage(
-                                imageUrl: story.previewImage!,
-                                width: widget.iconWidth,
-                                height: widget.iconHeight,
-                                fit: BoxFit.cover,
-                                placeholder: (context, url) =>
-                                    StoriesListSkeletonAlone(
-                                  width: widget.iconWidth!,
-                                  height: widget.iconHeight!,
-                                ),
-                                errorWidget: (context, url, error) =>
-                                    Icon(Icons.error),
+                          fit: BoxFit.cover,
+                          placeholder: (context, url) =>
+                              StoriesListSkeletonAlone(
+                                width: widget.iconWidth!,
+                                height: widget.iconHeight!,
+                              ),
+                          errorWidget: (context, url, error) =>
+                              Icon(Icons.error),
+                        ):VideoPlayerCard(videoUrl: story.file![0].url![widget.languageCode]!, width: widget.iconWidth!, height: widget.iconHeight!,isDarkMode: widget.isDarkMode,),
+                      ),
+                      Container(
+                        width: widget.iconWidth,
+                        height: widget.iconHeight,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.max,
+                          children: <Widget>[
+                            Padding(
+                              padding: widget.textInIconPadding,
+                              child: Text(
+                                story.previewTitle?[widget.languageCode] ?? '',
+                                style: widget.iconTextStyle,
+                                textAlign: TextAlign.left,
                               ),
                             ),
-                            Container(
-                              width: widget.iconWidth,
-                              height: widget.iconHeight,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisSize: MainAxisSize.max,
-                                children: <Widget>[
-                                  Padding(
-                                    padding: widget.textInIconPadding,
-                                    child: Text(
-                                      story.previewTitle![widget.languageCode]!,
-                                      style: widget.iconTextStyle,
-                                      textAlign: TextAlign.left,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ]),
+                          ],
                         ),
                       ),
-                    ),
-                    onTap: () async {
-                      _backStateAdditional = true;
-                      Navigator.push(
-                        context,
-                        NoAnimationMaterialPageRoute(
-                          builder: (context) => GroupedStoriesView(
-                            collectionDbName: widget.collectionDbName,
-                            languageCode: widget.languageCode,
-                            imageStoryDuration: widget.imageStoryDuration,
-                            progressPosition: widget.progressPosition,
-                            repeat: widget.repeat,
-                            inline: widget.inline,
-                            backgroundColorBetweenStories:
-                                widget.backgroundColorBetweenStories,
-                            closeButtonIcon: widget.closeButtonIcon,
-                            closeButtonBackgroundColor:
-                                widget.closeButtonBackgroundColor,
-                            sortingOrderDesc: widget.sortingOrderDesc,
-                            captionTextStyle: widget.captionTextStyle,
-                            captionPadding: widget.captionPadding,
-                            captionMargin: widget.captionMargin,
-                          ),
-                          settings: RouteSettings(
-                            arguments: StoriesListWithPressed(
-                                pressedStoryId: story.storyId,
-                                storiesIdsList: storiesIdsList),
-                          ),
-                        ),
-//                        ModalRoute.withName('/'),
-                      );
-                    },
+                    ]),
                   ),
-                );
-              } else {
-                return Padding(
-                  padding: EdgeInsets.only(left: 15.0, top: 8.0, bottom: 16.0),
-                  child: InkWell(
-                    child: Container(
-                      decoration: widget.iconBoxDecoration,
-                      width: widget.iconWidth,
-                      height: widget.iconHeight,
-                      child: Stack(children: <Widget>[
-                        ClipRRect(
-                          borderRadius:
-                              widget.iconImageBorderRadius ?? BorderRadius.zero,
-                          child: story.file![0].filetype == 'image'?CachedNetworkImage(
-                            imageUrl: story.file![0].url![widget.languageCode]!,
-                            width: widget.iconWidth,
-                            height: widget.iconHeight,
-                            fit: BoxFit.cover,
-                            placeholder: (context, url) =>
-                                StoriesListSkeletonAlone(
-                              width: widget.iconWidth!,
-                              height: widget.iconHeight!,
-                            ),
-                            errorWidget: (context, url, error) =>
-                                Icon(Icons.error),
-                          ):VideoPlayerCard(videoUrl: story.file![0].url![widget.languageCode]!, width: widget.iconWidth!, height: widget.iconHeight!,isDarkMode: widget.isDarkMode,),
+                  onTap: () async {
+                    _backStateAdditional = true;
+                    Navigator.push(
+                      context,
+                      NoAnimationMaterialPageRoute(
+                        builder: (context) => GroupedStoriesView(
+                          collectionDbName: widget.collectionDbName,
+                          languageCode: widget.languageCode,
+                          imageStoryDuration: widget.imageStoryDuration,
+                          progressPosition: widget.progressPosition,
+                          repeat: widget.repeat,
+                          inline: widget.inline,
+                          backgroundColorBetweenStories:
+                          widget.backgroundColorBetweenStories,
+                          closeButtonIcon: widget.closeButtonIcon,
+                          closeButtonBackgroundColor:
+                          widget.closeButtonBackgroundColor,
+                          sortingOrderDesc: widget.sortingOrderDesc,
+                          captionTextStyle: widget.captionTextStyle,
+                          captionPadding: widget.captionPadding,
+                          captionMargin: widget.captionMargin,
                         ),
-                        Container(
-                          width: widget.iconWidth,
-                          height: widget.iconHeight,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisSize: MainAxisSize.max,
-                            children: <Widget>[
-                              Padding(
-                                padding: widget.textInIconPadding,
-                                child: Text(
-                                  story.previewTitle?[widget.languageCode] ?? '',
-                                  style: widget.iconTextStyle,
-                                  textAlign: TextAlign.left,
-                                ),
-                              ),
-                            ],
-                          ),
+                        settings: RouteSettings(
+                          arguments: StoriesListWithPressed(
+                              pressedStoryId: story.storyId,
+                              storiesIdsList: storiesIdsList),
                         ),
-                      ]),
-                    ),
-                    onTap: () async {
-                      _backStateAdditional = true;
-                      Navigator.push(
-                        context,
-                        NoAnimationMaterialPageRoute(
-                          builder: (context) => GroupedStoriesView(
-                            collectionDbName: widget.collectionDbName,
-                            languageCode: widget.languageCode,
-                            imageStoryDuration: widget.imageStoryDuration,
-                            progressPosition: widget.progressPosition,
-                            repeat: widget.repeat,
-                            inline: widget.inline,
-                            backgroundColorBetweenStories:
-                                widget.backgroundColorBetweenStories,
-                            closeButtonIcon: widget.closeButtonIcon,
-                            closeButtonBackgroundColor:
-                                widget.closeButtonBackgroundColor,
-                            sortingOrderDesc: widget.sortingOrderDesc,
-                            captionTextStyle: widget.captionTextStyle,
-                            captionPadding: widget.captionPadding,
-                            captionMargin: widget.captionMargin,
-                          ),
-                          settings: RouteSettings(
-                            arguments: StoriesListWithPressed(
-                                pressedStoryId: story.storyId,
-                                storiesIdsList: storiesIdsList),
-                          ),
-                        ),
+                      ),
 //                        ModalRoute.withName('/'),
-                      );
-                    },
-                  ),
-                );
-              }
+                    );
+                  },
+                ),
+              );
             },
           );
         },
