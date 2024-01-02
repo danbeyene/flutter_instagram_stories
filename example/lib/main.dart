@@ -227,7 +227,7 @@ class _HomeState extends State<Home> {
               collectionDbName: collectionDbName,
               showTitleOnIcon: true,
               backFromStories: () {
-                _backFromStoriesAlert();
+                // _backFromStoriesAlert();
               },
               iconTextStyle: const TextStyle(
                 fontSize: 14.0,

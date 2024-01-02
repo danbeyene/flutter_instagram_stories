@@ -70,10 +70,11 @@ class _GroupedStoriesViewState extends State<GroupedStoriesView> {
   Widget build(BuildContext context) {
     final StoriesListWithPressed storiesListWithPressed =
         ModalRoute.of(context)!.settings.arguments as StoriesListWithPressed;
-    return WillPopScope(
-      onWillPop: () {
-        _navigateBack();
-        return Future.value(false);
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (isPop){
+        Navigator.pop(context);
+        // _navigateBack();
       },
       child: Scaffold(
         backgroundColor: widget.backgroundColorBetweenStories,
