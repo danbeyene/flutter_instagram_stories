@@ -73,8 +73,7 @@ class _GroupedStoriesViewState extends State<GroupedStoriesView> {
     return PopScope(
       canPop: false,
       onPopInvoked: (isPop){
-        Navigator.pop(context);
-        // _navigateBack();
+        _navigateBack();
       },
       child: Scaffold(
         backgroundColor: widget.backgroundColorBetweenStories,
@@ -235,12 +234,13 @@ class _GroupedStoriesViewState extends State<GroupedStoriesView> {
   }
 
   _navigateBack() {
-    return Navigator.pushNamedAndRemoveUntil(
-      context,
-      '/',
-      (_) => false,
-      arguments: 'back_from_stories_view',
-    );
+    return Navigator.pop(context);
+    // return Navigator.pushNamedAndRemoveUntil(
+    //   context,
+    //   '/',
+    //   (_) => false,
+    //   arguments: 'back_from_stories_view',
+    // );
   }
 
   void _onStoryShow(StoryItem s) {}
