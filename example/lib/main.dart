@@ -189,99 +189,99 @@ class _HomeState extends State<Home> {
         color: Colors.indigo,
         child: Column(
           children: <Widget>[
-            // ElevatedButton(
-            //     onPressed: () async {
-            //       await showStories(
-            //         context: context,
-            //         collectionDbName: collectionDbName,
-            //         languageCode: 'en',
-            //         imageStoryDuration: 7,
-            //         progressPosition: ProgressPosition.top,
-            //         repeat: true,
-            //         inline: false,
-            //         backgroundColorBetweenStories: Colors.black,
-            //         closeButtonIcon: const Icon(
-            //           Icons.close,
-            //           color: Colors.white,
-            //           size: 28.0,
-            //         ),
-            //         closeButtonBackgroundColor: const Color(0x11000000),
-            //         sortingOrderDesc: true,
-            //         captionTextStyle: const TextStyle(
-            //           fontSize: 22,
-            //           color: Colors.white,
-            //         ),
-            //         captionMargin: const EdgeInsets.only(
-            //           bottom: 50,
-            //         ),
-            //         captionPadding: const EdgeInsets.symmetric(
-            //           horizontal: 24,
-            //           vertical: 8,
-            //         ),
-            //       );
-            //     },
-            //     child: const Text(
-            //       "Test Button",
-            //       style: TextStyle(color: Colors.blue),
-            //     )),
-            FlutterInstagramStories(
-              collectionDbName: collectionDbName,
-              showTitleOnIcon: true,
-              backFromStories: () {
-                // _backFromStoriesAlert();
-              },
-              iconTextStyle: const TextStyle(
-                fontSize: 14.0,
-                color: Colors.white,
-              ),
-              iconImageBorderRadius: BorderRadius.circular(15.0),
-              iconBoxDecoration: const BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(15.0)),
-                color: Color(0xFFffffff),
-                boxShadow: [
-                  BoxShadow(
-                    color: Color(0xff333333),
-                    blurRadius: 10.0,
-                    offset: Offset(
-                      0.0,
-                      4.0,
+            ElevatedButton(
+                onPressed: () async {
+                  await showStories(
+                    context: context,
+                    collectionDbName: collectionDbName,
+                    languageCode: 'en',
+                    imageStoryDuration: 7,
+                    progressPosition: ProgressPosition.top,
+                    repeat: false,
+                    inline: false,
+                    backgroundColorBetweenStories: Colors.black,
+                    closeButtonIcon: const Icon(
+                      Icons.close,
+                      color: Colors.white,
+                      size: 28.0,
                     ),
-                  ),
-                ],
-              ),
-              iconWidth: 150.0,
-              iconHeight: 150.0,
-              textInIconPadding:
-                  const EdgeInsets.only(left: 8.0, right: 8.0, bottom: 12.0),
-              //how long story lasts in seconds
-              imageStoryDuration: 7,
-              progressPosition: ProgressPosition.top,
-              repeat: true,
-              inline: false,
-              languageCode: 'en',
-              backgroundColorBetweenStories: Colors.black,
-              closeButtonIcon: const Icon(
-                Icons.close,
-                color: Colors.white,
-                size: 28.0,
-              ),
-              closeButtonBackgroundColor: const Color(0x11000000),
-              sortingOrderDesc: true,
-              lastIconHighlight: true,
-              lastIconHighlightColor: Colors.deepOrange,
-              lastIconHighlightRadius: const Radius.circular(15.0),
-              captionTextStyle: const TextStyle(
-                fontSize: 22,
-                color: Colors.white,
-              ),
-              captionMargin: const EdgeInsets.only(
-                bottom: 50,
-              ),
-              captionPadding: const EdgeInsets.symmetric(
-                horizontal: 24,
-                vertical: 8,
-              ), isDarkMode: true,
-            ),
+                    closeButtonBackgroundColor: const Color(0x11000000),
+                    sortingOrderDesc: true,
+                    captionTextStyle: const TextStyle(
+                      fontSize: 22,
+                      color: Colors.white,
+                    ),
+                    captionMargin: const EdgeInsets.only(
+                      bottom: 50,
+                    ),
+                    captionPadding: const EdgeInsets.symmetric(
+                      horizontal: 24,
+                      vertical: 8,
+                    ),
+                  );
+                },
+                child: const Text(
+                  "Test Button",
+                  style: TextStyle(color: Colors.blue),
+                )),
+            // FlutterInstagramStories(
+            //   collectionDbName: collectionDbName,
+            //   showTitleOnIcon: true,
+            //   backFromStories: () {
+            //     // _backFromStoriesAlert();
+            //   },
+            //   iconTextStyle: const TextStyle(
+            //     fontSize: 14.0,
+            //     color: Colors.white,
+            //   ),
+            //   iconImageBorderRadius: BorderRadius.circular(15.0),
+            //   iconBoxDecoration: const BoxDecoration(
+            //     borderRadius: BorderRadius.all(Radius.circular(15.0)),
+            //     color: Color(0xFFffffff),
+            //     boxShadow: [
+            //       BoxShadow(
+            //         color: Color(0xff333333),
+            //         blurRadius: 10.0,
+            //         offset: Offset(
+            //           0.0,
+            //           4.0,
+            //         ),
+            //       ),
+            //     ],
+            //   ),
+            //   iconWidth: 150.0,
+            //   iconHeight: 150.0,
+            //   textInIconPadding:
+            //       const EdgeInsets.only(left: 8.0, right: 8.0, bottom: 12.0),
+            //   //how long story lasts in seconds
+            //   imageStoryDuration: 7,
+            //   progressPosition: ProgressPosition.top,
+            //   repeat: false,
+            //   inline: false,
+            //   languageCode: 'en',
+            //   backgroundColorBetweenStories: Colors.black,
+            //   closeButtonIcon: const Icon(
+            //     Icons.close,
+            //     color: Colors.white,
+            //     size: 28.0,
+            //   ),
+            //   closeButtonBackgroundColor: const Color(0x11000000),
+            //   sortingOrderDesc: true,
+            //   lastIconHighlight: true,
+            //   lastIconHighlightColor: Colors.deepOrange,
+            //   lastIconHighlightRadius: const Radius.circular(15.0),
+            //   captionTextStyle: const TextStyle(
+            //     fontSize: 22,
+            //     color: Colors.white,
+            //   ),
+            //   captionMargin: const EdgeInsets.only(
+            //     bottom: 50,
+            //   ),
+            //   captionPadding: const EdgeInsets.symmetric(
+            //     horizontal: 24,
+            //     vertical: 8,
+            //   ), isDarkMode: true,
+            // ),
             const Center(
               child: Padding(
                 padding: EdgeInsets.all(20.0),
